@@ -6,6 +6,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import firebase from 'firebase'
+import VueSweetalert2 from 'vue-sweetalert2';
+
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+Vue.use(VueSweetalert2);
 Vue.config.productionTip = false
 
 const config = {
@@ -17,18 +22,22 @@ const config = {
   messagingSenderId: "214665091880",
   appId: "1:214665091880:web:3fdc4e0eaee917eb770e1d"
 };
-var VueApp = new Vue({
-  router,
-  store,
-  render: h => h(App)
-})
 Vue.prototype.$fb = firebase
 firebase.initializeApp(config)
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     console.log('logged in', user)
+    router.replace('/shopika')
   } else {
-    console.log('logged out')
+    console.log('logged out', )
+    if (router.history.current.path != '/') {
+      router.replace('/')
+    }
   }
-  VueApp.$mount('#app')
+
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
 })

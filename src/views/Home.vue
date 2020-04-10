@@ -1,7 +1,12 @@
 <template>
   <div>
-    <b-container>
+    <b-container fluid class="parent">
       <b-row class="justify-content-center align-content-center custom-row">
+        <b-col cols="12">
+         <h1 class="text-white comic" >
+            Vue Shopika
+         </h1>
+        </b-col>
         <b-col cols="12" md="4">
           <b-card hide-footer hide-header>
             <h2>Login</h2>
@@ -62,5 +67,8 @@ export default {
 <style>
 .custom-row {
   height: 100vh !important;
+}
+.parent {
+  background: linear-gradient(rgb(44, 55, 200),rgb(127, 127, 165))
 }
 </style>

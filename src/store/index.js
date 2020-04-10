@@ -10,12 +10,18 @@ const store =  new Vuex.Store({
   },
   actions: {
     login(state,p) {
-      alert('its called')
-      firebase.auth().signInWithEmailAndPassword(p.email,p.password)
+      var _ = this._vm
+      _.$swal.showLoading()
+      _.$fb.auth().signInWithEmailAndPassword(p.email,p.password)
       .then(res=>{
         console.log('user',res)
+        _.$swal.close()
       }).catch(err=>{
         console.log('err in login',err)
+        _.$swal({
+          text:err.message,
+          icon:'error'
+        })
       })
     }
   },
